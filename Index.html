@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Flujo de Stock — móvil (3 por slide)</title>
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
+  <style>
+    /* Base */
+    html, body { height: 100%; margin: 0; background: #eef2f7; }
+    :root { --vh: 1vh; }
+    .app { height: calc(var(--vh, 1vh) * 100); width: 100%; overflow: hidden; }
+
+    /* Swiper */
+    .swiper { height: 100%; width: 100%; }
+    .swiper-pagination-bullet { background: rgba(0,0,0,.35); }
+    .swiper-pagination-bullet-active { background: #0e57d2; }
+
+    /* Panel slide (como tu mockup) */
+    .panel {
+      height: 100%;
+      width: 100%;
+      padding: 14px 12px 16px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 10px;
+      box-sizing: border-box;
+      background:
+        radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,.6), rgba(255,255,255,0) 55%),
+        linear-gradient(180deg, #f7f9fc 0%, #e9f0fb 100%);
+    }
+
+    .panel .card {
+      max-width: 980px;
+      margin: 0 auto;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      padding: 12px 12px 16px;
+      box-sizing: border-box;
+    }
+
+    .titulo {
+      font: 800 clamp(22px, 6vw, 38px)/1.15 system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      color: #114aa6;
+      text-align: center;
+      margin: 4px 0 6px;
+    }
+
+    .badge {
+      justify-self: center;
+      display: inline-block;
+      padding: 8px 14px;
+      font: 700 13px/1 system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      color: #fff;
+      background: #1e63da;
+      border-radius: 10px;
+      box-shadow: 0 6px 14px rgba(17,74,166,.25);
+    }
+
+    /* Grid 3 columnas como en tu diseño */
+    .productos {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;   /* 3 por vista */
+      gap: 10px;
+      align-items: start;
+      margin-top: 4px;
+    }
+
+    /* Tarjeta de producto */
+    .prod {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .frame {
+      border-radius: 18px;
+      background: #fff;
+      padding: 10px;
+      box-shadow: inset 0 0 0 12px #eef3ff;
+      position: relative;
+      aspect-ratio: 1 / 1;                /* cuadro cuadrado como en tu lámina */
+      display: grid;
+      place-items: center;
+    }
+
+
+
+    .frame img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nombre {
+      font: 800 clamp(10px, 2.6vw, 13px)/1.1 system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      color: #0d0f14;
+      text-transform: uppercase;
+      letter-spacing: .2px;
+    }
+
+    /* En móviles muy angostos, mantenemos 3 columnas pero compactamos un poco */
+    @media (max-width: 360px) {
+      .frame { border-radius: 14px; }
+      .panel .card { padding: 10px; }
+      .productos { gap: 8px; }
+    }
+
+    /* Flechas opcionales (ocultas en touch) */
+    .swiper-button-next, .swiper-button-prev { color: #114aa6; }
+    @media (hover:none) {
+      .swiper-button-next, .swiper-button-prev { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+
+        <!-- SLIDE 1: exactamente como tu ejemplo (Productos A) -->
+        <section class="swiper-slide">
+          <div class="panel">
+            <div class="card">
+              <h1 class="titulo">Flujo de Stock</h1>
+              <div class="badge">Productos A</div>
+
+              <div class="productos">
+                <div class="prod">
+                  <div class="frame ok">
+                    <img src="SillaTee.png" alt="SILLA TEE 160MM X 160MM UF">
+                  </div>
+                  <div class="nombre">SILLA TEE 160MM X 160MM UF</div>
+                </div>
+                <div class="prod">
+                  <div class="frame ok">
+                    <img src="Abrazadera.png" alt="ABRAZADERA">
+                  </div>
+                  <div class="nombre">ABRAZADERA</div>
+                </div>
+                <div class="prod">
+                  <div class="frame alert">
+                    <img src="SillaYee.png" alt="SILLA YEE 200MM X 160MM UF">
+                  </div>
+                  <div class="nombre">SILLA YEE 200MM X 160MM UF</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SLIDE 2 (Productos B) -->
+        <section class="swiper-slide">
+          <div class="panel">
+            <div class="card">
+              <h1 class="titulo">Flujo de Stock</h1>
+              <div class="badge" style="background:#5aa6ff">Productos B</div>
+
+              <div class="productos">
+                <div class="prod">
+                  <div class="frame warn">
+                    <img src="CodoVentilacion.png" alt="CODO VENTILACIÓN 4” X 2” DS">
+                  </div>
+                  <div class="nombre">CODO VENTILACIÓN 4” X 2” DS</div>
+                </div>
+                <div class="prod">
+                  <div class="frame warn">
+                    <img src="Codo.png" alt="CODO 4” X 90° DS (105MM)">
+                  </div>
+                  <div class="nombre">CODO 4” X 90° DS (105MM)</div>
+                </div>
+                <div class="prod">
+                  <div class="frame alert">
+                    <img src="Caja.png" alt="CAJA OCTOGONAL">
+                  </div>
+                  <div class="nombre">CAJA OCTOGONAL</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SLIDE 3 (Productos B) -->
+        <section class="swiper-slide">
+          <div class="panel">
+            <div class="card">
+              <h1 class="titulo">Flujo de Stock</h1>
+              <div class="badge" style="background:#5aa6ff">Productos B</div>
+
+              <div class="productos">
+                <div class="prod">
+                  <div class="frame ok">
+                    <img src="Conector.png" alt="CONECTOR 3/4” SEL (19.0MM)">
+                  </div>
+                  <div class="nombre">CONECTOR 3/4” SEL (19.0MM)</div>
+                </div>
+                <div class="prod">
+                  <div class="frame ok">
+                    <img src="Tapon.png" alt="TAPÓN 90MM SP">
+                  </div>
+                  <div class="nombre">TAPÓN 90MM SP</div>
+                </div>
+                <div class="prod">
+                  <div class="frame ok">
+                    <img src="Curvas.png" alt="CURVAS PVC-U X 90° ELÉCTRICOS SAP">
+                  </div>
+                  <div class="nombre">CURVAS PVC-U X 90° ELÉCTRICOS SAP</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SLIDE 4 (Productos B) -->
+        <section class="swiper-slide">
+          <div class="panel">
+            <div class="card">
+              <h1 class="titulo">Flujo de Stock</h1>
+              <div class="badge" style="background:#5aa6ff">Productos B</div>
+
+              <div class="productos">
+                <div class="prod">
+                  <div class="frame alert">
+                    <img src="Tee.png" alt="TEE 1 ¼” SP (42MM)">
+                  </div>
+                  <div class="nombre">TEE 1 ¼” SP (42MM)</div>
+                </div>
+                <div class="prod">
+                  <div class="frame ok">
+                    <img src="Reduccion.png" alt="REDUCCIÓN DE 1” A 3/4” SP">
+                  </div>
+                  <div class="nombre">REDUCCIÓN DE 1” A 3/4” SP</div>
+                </div>
+                <div class="prod">
+                  <div class="frame ok">
+                    <!-- Pon aquí otro producto si deseas -->
+                    <img src="Conector.png" alt="Producto extra">
+                  </div>
+                  <div class="nombre">PRODUCTO EXTRA</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Paginación y (opcional) flechas -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev" aria-label="Anterior"></div>
+      <div class="swiper-button-next" aria-label="Siguiente"></div>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    // 100vh real en móviles
+    function setVH(){ document.documentElement.style.setProperty('--vh', (innerHeight * 0.01) + 'px'); }
+    setVH(); addEventListener('resize', setVH);
+
+    // Carrusel
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      allowTouchMove: true,
+      centeredSlides: true,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      autoplay: { delay: 3000, disableOnInteraction: false },
+      speed: 450
+    });
+  </script>
+</body>
+</html>
