@@ -5,19 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Flujo de Stock — móvil (3 por slide)</title>
 
+  <!-- Color de la barra del sistema / navegador -->
+  <meta name="theme-color" content="#eef2f7">
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- iOS (para que también se vea tipo app) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Flujo de Stock">
+
+  <!-- Icono para iOS (usa el mismo que el de 192 si quieres) -->
+  <link rel="apple-touch-icon" href="icon-192.png">
+
   <!-- Swiper -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
   <style>
     /* Base */
-    html, body { height: 100%; margin: 0; background: #eef2f7; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #eef2f7;
+      overscroll-behavior: none;
+    }
+
     :root { --vh: 1vh; }
-    .app { height: calc(var(--vh, 1vh) * 100); width: 100%; overflow: hidden; }
+
+    .app {
+      height: calc(var(--vh, 1vh) * 100);
+      width: 100%;
+      overflow: hidden;
+    }
 
     /* Swiper */
-    .swiper { height: 100%; width: 100%; }
-    .swiper-pagination-bullet { background: rgba(0,0,0,.35); }
-    .swiper-pagination-bullet-active { background: #0e57d2; }
+    .swiper {
+      height: 100%;
+      width: 100%;
+    }
+    .swiper-pagination-bullet {
+      background: rgba(0,0,0,.35);
+    }
+    .swiper-pagination-bullet-active {
+      background: #0e57d2;
+    }
 
     /* Panel slide (como tu mockup) */
     .panel {
@@ -79,19 +111,6 @@
       text-align: center;
     }
 
-    .frame {
-      border-radius: 18px;
-      background: #fff;
-      padding: 10px;
-      box-shadow: inset 0 0 0 12px #eef3ff;
-      position: relative;
-      aspect-ratio: 1 / 1;                /* cuadro cuadrado como en tu lámina */
-      display: grid;
-      place-items: center;
-    }
-
-
-
     .frame img {
       max-width: 100%;
       max-height: 100%;
@@ -114,9 +133,15 @@
     }
 
     /* Flechas opcionales (ocultas en touch) */
-    .swiper-button-next, .swiper-button-prev { color: #114aa6; }
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #114aa6;
+    }
     @media (hover:none) {
-      .swiper-button-next, .swiper-button-prev { display: none; }
+      .swiper-button-next,
+      .swiper-button-prev {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -125,7 +150,7 @@
     <div class="swiper">
       <div class="swiper-wrapper">
 
-        <!-- SLIDE 1: exactamente como tu ejemplo (Productos A) -->
+        <!-- SLIDE 1: Productos A -->
         <section class="swiper-slide">
           <div class="panel">
             <div class="card">
@@ -156,7 +181,7 @@
           </div>
         </section>
 
-        <!-- SLIDE 2 (Productos B) -->
+        <!-- SLIDE 2: Productos B -->
         <section class="swiper-slide">
           <div class="panel">
             <div class="card">
@@ -187,12 +212,12 @@
           </div>
         </section>
 
-        <!-- SLIDE 3 (Productos B) -->
+        <!-- SLIDE 3: Productos B -->
         <section class="swiper-slide">
           <div class="panel">
             <div class="card">
               <h1 class="titulo">Flujo de Stock</h1>
-              <div class="badge" style="background:#5aa6ff">Productos B</div>
+              <div class="badge" style="background:#5aa6ff">Productos C</div>
 
               <div class="productos">
                 <div class="prod">
@@ -218,12 +243,12 @@
           </div>
         </section>
 
-        <!-- SLIDE 4 (Productos B) -->
+        <!-- SLIDE 4: Productos B -->
         <section class="swiper-slide">
           <div class="panel">
             <div class="card">
               <h1 class="titulo">Flujo de Stock</h1>
-              <div class="badge" style="background:#5aa6ff">Productos B</div>
+              <div class="badge" style="background:#5aa6ff">Productos D</div>
 
               <div class="productos">
                 <div class="prod">
@@ -240,7 +265,6 @@
                 </div>
                 <div class="prod">
                   <div class="frame ok">
-                    <!-- Pon aquí otro producto si deseas -->
                     <img src="Conector.png" alt="Producto extra">
                   </div>
                   <div class="nombre">PRODUCTO EXTRA</div>
@@ -263,8 +287,11 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
     // 100vh real en móviles
-    function setVH(){ document.documentElement.style.setProperty('--vh', (innerHeight * 0.01) + 'px'); }
-    setVH(); addEventListener('resize', setVH);
+    function setVH() {
+      document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+    }
+    setVH();
+    window.addEventListener('resize', setVH);
 
     // Carrusel
     const swiper = new Swiper('.swiper', {
@@ -276,6 +303,12 @@
       autoplay: { delay: 3000, disableOnInteraction: false },
       speed: 450
     });
+
+    // Registrar Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .catch(err => console.log('SW error', err));
+    }
   </script>
 </body>
 </html>
